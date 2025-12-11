@@ -5,25 +5,30 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "theater_seats")
+@Table(name = "show_seats")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TheaterSeat {
+public class ShowSeat {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer theaterSeatId;
+    private Integer showSeatId;
 
     private String seatNo;
 
     @Enumerated(value = EnumType.STRING)
     private SeatType seatType;
 
-    @JoinColumn(name = "theater_id", nullable = false)
+    private Integer price;
+
+    private Boolean isAvailable;
+
     @ManyToOne
-    private Theater theater;
+    @JoinColumn
+    private Show show;
 
 
 }

@@ -1,6 +1,7 @@
 package com.Book_My_Show.Controller;
 
 import com.Book_My_Show.Requests.AddTheaterRequest;
+import com.Book_My_Show.Requests.AddTheaterSeatRequest;
 import com.Book_My_Show.Service.TheaterService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,11 @@ public class TheaterController {
         String result = theaterService.addTheater(addTheaterRequest);
         return result;
     }
-    @GetMapping("addTheaterSeats")
-    public String addTheaterSeats(@RequestBody AddTheaterRequest addTheaterRequest){
+    @PostMapping("addTheaterSeats")
+    public String addTheaterSeats(@RequestBody AddTheaterSeatRequest addTheaterSeatRequest){
 
-
+        String result = theaterService.addTheaterSeats(addTheaterSeatRequest);
+        return result;
 
     }
 

@@ -57,7 +57,7 @@ public class TheaterService {
         Integer theaterId = addTheaterSeatRequest.getTheaterId();
         Theater theater = theaterRepository.findById(theaterId).get();
 
-        int classicSeatCountor = 0;
+        int classicSeatCountor = 1;
         char ch = 'A';
         int rowNo = 1;
 
@@ -65,7 +65,7 @@ public class TheaterService {
 
         while (classicSeatCountor<=noOfClassicSeats){
 
-            String seatNo = rowNo+ch +"";
+            String seatNo = rowNo+ "" +ch;
             TheaterSeat theaterSeat = TheaterSeat.builder()
                     .seatNo(seatNo)
                     .seatType(SeatType.CLASSIC)
@@ -75,19 +75,23 @@ public class TheaterService {
             theaterSeatList.add(theaterSeat);
             ch++;
 
-            if(classicSeatCountor%5==0){
+
+            if(classicSeatCountor % 5 == 0){
                 rowNo = rowNo+1;
                 ch = 'A';
             }
+            classicSeatCountor++;
         }
 
-        int premiumSeatCountor = 0;
-        ch = 'A';
-        rowNo = 1;
+        int premiumSeatCountor = 1;
+        ch='A';
+
+        if(classicSeatCountor%5!=1)
+        rowNo = rowNo+1;
 
         while (premiumSeatCountor<=noOfPremiumSeats){
 
-            String seatNo = rowNo+ch +"";
+            String seatNo = rowNo+ "" +ch;
             TheaterSeat theaterSeat = TheaterSeat.builder()
                     .seatNo(seatNo)
                     .seatType(SeatType.PREMIUM)
@@ -97,12 +101,20 @@ public class TheaterService {
             theaterSeatList.add(theaterSeat);
             ch++;
 
-            if(premiumSeatCountor%5==0){
+            if(premiumSeatCountor % 5 == 0){
                 rowNo = rowNo+1;
                 ch = 'A';
             }
+            premiumSeatCountor++;
         }
+
+        theater.setTheaterSeatList(theaterSeatList);
+        theaterRepository.save(theater);
+
         theaterSeatRepository.saveAll(theaterSeatList);
+
+        //Theater seats will get automatically saved
+        //bcz of cascading property written in the parent table
         return "Theater seats have been generated";
     }
 }

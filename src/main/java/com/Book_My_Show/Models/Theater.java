@@ -1,9 +1,10 @@
 package com.Book_My_Show.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "theaters")
@@ -15,6 +16,7 @@ import lombok.*;
 public class Theater {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer theaterId;
 
     private String name;
@@ -22,4 +24,7 @@ public class Theater {
     private String address;
 
     private Integer onOfScreens;
+
+    @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
+    private List<TheaterSeat> theaterSeatList = new ArrayList<>();
 }

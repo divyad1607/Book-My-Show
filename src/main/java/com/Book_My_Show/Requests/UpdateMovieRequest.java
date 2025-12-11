@@ -1,4 +1,4 @@
-package com.Book_My_Show;
+package com.Book_My_Show.Requests;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class AddTheaterSeatRequest {
 
-    private int NoOfClassicSeats;
-    private int NoOfPremiumSeats;
+    private int noOfClassicSeats;
+    private int noOfPremiumSeats;
     private int theaterId;
 }
