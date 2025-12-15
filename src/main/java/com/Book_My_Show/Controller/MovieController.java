@@ -1,6 +1,7 @@
 package com.Book_My_Show.Controller;
 
 import com.Book_My_Show.Models.Movie;
+import com.Book_My_Show.Requests.AddMovieRequest;
 import com.Book_My_Show.Service.MovieService;
 import com.Book_My_Show.Requests.UpdateMovieRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ public class MovieController {
     private MovieService movieService;
 
     @PostMapping("/addMovie")
-    public String addMovie(@RequestBody Movie movie){
+    public String addMovie(@RequestBody AddMovieRequest movieRequest){
 
-        String response = movieService.addMovie(movie);
+        String response = movieService.addMovie(movieRequest);
         return response;
     }
 
