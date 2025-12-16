@@ -22,7 +22,7 @@ public class MovieService {
         movie.setRating(movieRequest.getRating());
         movie.setReleaseDate(movieRequest.getReleaseDate());
         movie = movieRepository.save(movie);
-        return "The movie has been saved to the DB with movieId" + movie.getMovieName();
+        return "The movie has been saved to the DB with movieId" + movie.getMovieId();
 
     }
 

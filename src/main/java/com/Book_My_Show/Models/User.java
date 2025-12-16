@@ -20,4 +20,9 @@ public class User {
     @Column(unique = true)
     private String mobileNo;
 
+    private String password;
+
+    private String role;
+
+
 }

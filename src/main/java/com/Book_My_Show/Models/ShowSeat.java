@@ -1,6 +1,8 @@
 package com.Book_My_Show.Models;
 
+import com.Book_My_Show.Enums.SeatStatus;
 import com.Book_My_Show.Enums.SeatType;
+import com.Book_My_Show.Enums.TicketStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,9 +28,17 @@ public class ShowSeat {
 
     private Boolean isAvailable;
 
+
+    @Enumerated(EnumType.STRING)
+    private TicketStatus ticketStatus; // BOOKED / CANCELLED
+
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "show_id")
     private Show show;
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 
 
 }

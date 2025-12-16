@@ -1,5 +1,6 @@
 package com.Book_My_Show.Models;
 
+import com.Book_My_Show.Enums.TicketStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import java.time.LocalTime;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String ticketId;
 
     private String movieName;
@@ -28,6 +29,9 @@ public class Ticket {
     private LocalTime showTime;
 
     private String theaterNameAndAddress;
+
+    @Enumerated(EnumType.STRING)
+    private TicketStatus ticketStatus; // BOOKED / CANCELLED
 
     private Integer totalAmtPaid;
     @JoinColumn

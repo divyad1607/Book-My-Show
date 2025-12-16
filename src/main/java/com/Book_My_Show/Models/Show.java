@@ -1,7 +1,5 @@
 package com.Book_My_Show.Models;
 
-
-import com.Book_My_Show.Repository.TheaterRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,16 +18,16 @@ public class Show {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer showId;
 
-    private LocalDate showDate; //"YYYY-MM-DD"
+    private LocalDate showDate; // yyyy-MM-dd
 
-    private LocalTime showTime; //"HH-MM-SS"
+    private LocalTime showTime; // HH:mm or HH:mm:ss
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
 
 }
