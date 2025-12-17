@@ -9,8 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public interface ShowRepository extends JpaRepository<Show,Integer> {
-    public Show findByShowDateAndShowTimeAndMovieAndTheater(LocalDate showDate,
-                                                            LocalTime showTime,
-                                                            Movie movie,
-                                                            Theater theater);
+    public Show findShowByShowDateAndShowTimeAndMovieAndTheater(LocalDate showDate,
+                                                                LocalTime showTime,
+                                                                Movie movie,
+                                                                Theater theater);
+
 }

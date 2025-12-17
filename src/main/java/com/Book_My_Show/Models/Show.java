@@ -1,10 +1,12 @@
 package com.Book_My_Show.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "shows")
@@ -20,7 +22,8 @@ public class Show {
 
     private LocalDate showDate; // yyyy-MM-dd
 
-    private LocalTime showTime; // HH:mm or HH:mm:ss
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private LocalTime showTime;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)

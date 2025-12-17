@@ -1,7 +1,9 @@
 package com.Book_My_Show.Models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+
 
 @Entity
 @Table(name = "users")
@@ -18,11 +20,7 @@ public class User {
     private String emailId;
 
     @Column(unique = true)
-    private String mobileNo;
-
-    private String password;
-
-    private String role;
+    private String mobNo;
 
 
 }

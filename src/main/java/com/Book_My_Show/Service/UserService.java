@@ -2,11 +2,10 @@ package com.Book_My_Show.Service;
 
 import com.Book_My_Show.Models.User;
 import com.Book_My_Show.Repository.UserRepository;
-import com.Book_My_Show.Requests.LoginRequest;
-import com.Book_My_Show.Requests.RegisterRequest;
-import com.Book_My_Show.Security.JwtUtil;
+import com.Book_My_Show.Requests.AddUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,36 +15,31 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private JavaMailSender javaMailSender;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    public String addUser(User user){
 
-    public String register(RegisterRequest request) {
+//        userRepository.save(user);
+        user = userRepository.save(user);
 
-        User user = new User();
-        user.setName(request.getName());
-        user.setEmailId(request.getEmailId());
-        user.setMobileNo(request.getMobileNo());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER");
 
-        userRepository.save(user);
+        SimpleMailMessage message = new SimpleMailMessage();
 
-        return "User registered successfully";
+        message.setSubject("Welcome to Book Your Show Application");
+        message.setFrom("springacciojob@gmail.com");
+        message.setTo(user.getEmailId());
+
+        String body = "Hi "+user.getName()+"! "+"\n"+
+                "Welcome to Book your show Application !! , Feel free " +
+                "to browse the movies and use Coupon START100 for an instant discount";
+
+        message.setText(body);
+
+        javaMailSender.send(message);
+
+
+        return "The user has been saved to the DB with userId"+user.getUserId();
     }
 
-    public String login(LoginRequest request) {
-
-        User user = userRepository.findByEmailId(request.getEmailId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid password");
-        }
-
-        return jwtUtil.generateToken(user.getEmailId());
-    }
 
 }
-

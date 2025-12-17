@@ -14,7 +14,7 @@ public class BookTicketRequest {
 
     private LocalDate showDate;
 
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss") // Matches the String "14:30:00"
     private LocalTime showTime;
 
     private List<String> requestedSeats;

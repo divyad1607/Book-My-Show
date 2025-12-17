@@ -28,17 +28,10 @@ public class ShowSeat {
 
     private Boolean isAvailable;
 
-
-    @Enumerated(EnumType.STRING)
-    private TicketStatus ticketStatus; // BOOKED / CANCELLED
-
     @ManyToOne
-    @JoinColumn(name = "show_id")
+    @JoinColumn
     private Show show;
-
     @ManyToOne
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
-
-
 }
